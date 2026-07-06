@@ -127,6 +127,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Essential for Render deployment
+import os
+ALLOWED_HOSTS = ['*']  # Allows your Render URL to connect
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
