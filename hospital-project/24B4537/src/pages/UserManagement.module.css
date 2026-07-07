@@ -151,3 +151,19 @@
   border-radius: 6px;
   margin: 1rem 0;
 }
+
+.buttonSmall {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.buttonSmall:hover {
+  opacity: 0.85;
+}

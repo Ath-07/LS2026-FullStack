@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
 import styles from './Login.module.css'
 
@@ -51,6 +51,9 @@ function Login() {
           </div>
           <button className={styles.button} type="submit">Login</button>
         </form>
+        <p style={{ textAlign: 'center', marginTop: '1rem', fontSize: '0.875rem', color: 'var(--text-light)' }}>
+          Don&apos;t have an account? <Link to="/register" style={{ color: 'var(--primary-blue)' }}>Sign up</Link>
+        </p>
       </div>
     </div>
   )

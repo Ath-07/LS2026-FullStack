@@ -10,7 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ("id", "username", "email", "role", "first_name", "last_name", "full_name")
+        fields = ("id", "username", "email", "role", "first_name", "last_name", "full_name", "is_approved")
 
     def get_full_name(self, obj):
         return obj.get_full_name() or obj.username
@@ -44,12 +44,14 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "email", "password", "role", "first_name", "last_name")
 
     def create(self, validated_data):
+        role = validated_data.get("role", User.Role.PATIENT)
         user = User.objects.create_user(
             username=validated_data["username"],
             email=validated_data.get("email", ""),
             password=validated_data["password"],
-            role=validated_data.get("role", User.Role.PATIENT),
+            role=role,
             first_name=validated_data.get("first_name", ""),
             last_name=validated_data.get("last_name", ""),
+            is_approved=(role == User.Role.PATIENT),
         )
         return user

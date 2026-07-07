@@ -12,7 +12,7 @@ function Navbar() {
       <div className={styles.links}>
         <Link to="/dashboard" className={styles.link}>Dashboard</Link>
         <Link to="/booking" className={styles.link}>Book Appointment</Link>
-        {(user?.is_staff || user?.role === 'doctor') && <Link to="/user-management" className={styles.link}>Manage Users</Link>}
+        {user?.is_staff && <Link to="/user-management" className={styles.link}>Manage Users</Link>}
       </div>
       <span className={styles.userEmail}>{user?.email}</span>
       <button className={styles.logoutBtn} onClick={logout}>Logout</button>

@@ -37,17 +37,10 @@ function Dashboard() {
 
   useEffect(() => {
     api.get('appointments/')
-      .then((res) => {
-        const mine = res.data.filter((a) => {
-          if (user?.role === 'doctor') return a.doctor?.user?.id === user.id
-          if (user?.is_staff) return true
-          return a.patient?.id === user?.id
-        })
-        setAppointments(mine)
-      })
+      .then((res) => setAppointments(res.data))
       .catch(() => {})
       .finally(() => setLoading(false))
-  }, [user])
+  }, [])
 
   return (
     <div className={styles.container}>

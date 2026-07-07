@@ -13,4 +13,7 @@ urlpatterns = [
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("api/register/", views.RegisterView.as_view(), name="register"),
     path("api/user/", views.current_user, name="current_user"),
+    path("api/pending-doctors/", views.PendingDoctorsListView.as_view(), name="pending-doctors"),
+    path("api/approve-doctor/<int:user_id>/", views.approve_doctor, name="approve-doctor"),
+    path("api/reject-doctor/<int:user_id>/", views.reject_doctor, name="reject-doctor"),
 ]
