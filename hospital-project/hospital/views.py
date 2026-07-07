@@ -45,17 +45,18 @@ class DoctorViewSet(viewsets.ModelViewSet):
 
 
 class AppointmentViewSet(viewsets.ModelViewSet):
-    queryset = Appointment.objects.all()
+    queryset = Appointment.objects.select_related("doctor__user", "patient")
     serializer_class = AppointmentSerializer
     permission_classes = [IsAuthenticated, IsPatientOrStaff]
 
     def get_queryset(self):
         user = self.request.user
+        qs = Appointment.objects.select_related("doctor__user", "patient")
         if user.is_staff:
-            return Appointment.objects.all()
+            return qs
         if user.role == "doctor":
-            return Appointment.objects.filter(doctor__user=user)
-        return Appointment.objects.filter(patient=user)
+            return qs.filter(doctor__user=user)
+        return qs.filter(patient=user)
 
     def perform_create(self, serializer):
         serializer.save(patient=self.request.user)

@@ -37,6 +37,7 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = "__all__"
+        read_only_fields = ("patient",)
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
